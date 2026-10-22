@@ -1,315 +1,792 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Karki | كرمشها</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Lalezar&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        karkiOrange: '#f97316', // برتقالي كاركي
-                        karkiBlack: '#0f0f0f',  // أسود فاحم
-                        karkiDark: '#1a1a1a',   // رمادي غامق للكروت
-                    },
-                    fontFamily: {
-                        cairo: ['Cairo', 'sans-serif'],
-                        lalezar: ['Lalezar', 'cursive'], // خط شبيه باليدوي
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* إخفاء شريط التمرير */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0f0f0f; }
-        ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 4px; }
-        
-        /* تأثير الخلفية */
-        .hero-bg {
-            background-image: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 100%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0908">
+<meta name="description" content="كاركي - كرمشها ومتسيبش ولا نتفة! اكتشف منيو كاركي واطلب أونلاين.">
+<title>Karki | كرمشها ومتسيبش ولا نتفة!</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Lalezar&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --orange:#ff8500;
+  --orange2:#ffac38;
+  --black:#090807;
+  --panel:#151311;
+  --panel2:#1c1916;
+  --border:#443326;
+  --white:#fff;
+  --muted:#c5beb6;
+  --green:#08bf55;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:95px}
+body{
+  background:var(--black);color:var(--white);
+  font-family:'Cairo',sans-serif;overflow-x:hidden;
+}
+button,input,textarea{font:inherit}
+button,a{-webkit-tap-highlight-color:transparent}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(1440px,94%);margin:auto}
+.orange{color:var(--orange)}
+.section-title{
+  font-family:'Lalezar',cursive;text-align:center;
+  font-size:clamp(30px,4vw,48px);color:var(--orange);
+  margin-bottom:24px;
+}
+.section-title span{padding:0 18px}
+.section-title:before,.section-title:after{
+  content:"";display:inline-block;width:55px;height:5px;
+  background:var(--orange);transform:skew(-35deg);
+  vertical-align:middle;border-radius:4px;
+}
+header{
+  height:86px;position:sticky;top:0;z-index:50;
+  background:rgba(9,8,7,.96);backdrop-filter:blur(16px);
+  border-bottom:1px solid #8b4c12;
+}
+.nav{
+  height:100%;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;
+}
+.brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.brand-mark{
+  width:72px;height:72px;border:2px solid var(--orange);
+  border-radius:50%;display:flex;align-items:center;
+  justify-content:center;flex-direction:column;
+  background:radial-gradient(circle,#35200d,#090807 70%);
+  box-shadow:0 0 16px #ff850027;line-height:1;
+}
+.brand-mark i{font-size:26px;color:var(--orange)}
+.brand-mark strong{font-family:'Lalezar';font-size:23px}
+.nav-links{display:flex;align-items:center;gap:clamp(15px,3vw,42px)}
+.nav-links a{font-weight:800;color:#eee;transition:.2s}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+.nav-links a.active{border-bottom:3px solid var(--orange);padding:29px 0 25px}
+.social{display:flex;gap:18px;align-items:center;color:#eee}
+.social a{font-size:21px;transition:.2s}
+.social a:hover{color:var(--orange)}
+.order-top,.btn{
+  border:0;border-radius:50px;background:var(--orange);
+  color:white;font-weight:800;padding:13px 24px;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  transition:transform .2s,background .2s;
+}
+.order-top:hover,.btn:hover{background:#ff9e1c;transform:translateY(-2px)}
+.cart-count{
+  min-width:23px;height:23px;border-radius:50%;
+  background:white;color:#e65e00;font-size:12px;
+  display:inline-flex;align-items:center;justify-content:center;
+}
+.mobile-menu{display:none;background:none;border:0;color:white;font-size:24px}
+
+/* HERO */
+.hero{
+  min-height:390px;position:relative;isolation:isolate;
+  display:grid;grid-template-columns:1.05fr .95fr;
+  align-items:center;gap:15px;padding:25px 0 12px;
+}
+.hero:before{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:radial-gradient(ellipse at 20% 55%,#3b1e0a66,transparent 50%),
+  linear-gradient(90deg,#09080700,#090807 60%);
+}
+.hero-food{position:relative;min-width:0}
+.hero-food img{
+  width:100%;height:330px;object-fit:cover;
+  border-radius:8px;filter:drop-shadow(0 14px 22px #000);
+  -webkit-mask-image:linear-gradient(0deg,transparent 0%,black 13%,black 90%,transparent 100%);
+  mask-image:linear-gradient(0deg,transparent 0%,black 13%,black 90%,transparent 100%);
+}
+.hero-copy{text-align:center;position:relative;z-index:2;padding:8px}
+.hero-kicker{font-weight:800;color:var(--orange2);font-size:16px}
+.hero h1{
+  font-family:'Lalezar',cursive;
+  font-size:clamp(40px,5.4vw,76px);
+  line-height:1.12;margin:8px 0 16px;
+  text-shadow:0 3px 20px #ff850022;
+}
+.hero h1 span{display:block;color:var(--orange)}
+.hero-copy p{font-size:clamp(15px,1.7vw,21px);font-weight:700;color:#e8e2dc;line-height:1.8}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.btn-outline{
+  background:transparent;border:2px solid white;
+  border-radius:50px;padding:11px 24px;font-weight:800;
+  display:inline-flex;align-items:center;gap:10px;transition:.2s;
+}
+.btn-outline:hover{background:white;color:#111}
+.hero .btn{box-shadow:0 5px 20px #ff850033}
+
+/* FEATURES */
+.features{padding:10px 0 22px}
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.feature{
+  border:1px solid var(--border);border-radius:14px;
+  padding:20px;display:flex;align-items:center;gap:18px;
+  background:linear-gradient(135deg,#171411,#0d0b09);
+  transition:.25s;min-height:105px;
+}
+.feature:hover{border-color:var(--orange);transform:translateY(-3px)}
+.feature i{font-size:38px;color:var(--orange);flex-shrink:0;width:46px;text-align:center}
+.feature h3{font-size:19px;color:var(--orange2);margin-bottom:4px}
+.feature p{font-size:13px;color:#e1dcd6;line-height:1.7}
+
+/* MENU */
+.menu-section{padding:0 0 38px}
+.menu-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.product{
+  overflow:hidden;border:1px solid #49372a;border-radius:13px;
+  background:linear-gradient(145deg,#1a1714,#0e0c0a);
+  transition:.25s;display:flex;flex-direction:column;min-width:0;
+}
+.product:hover{border-color:var(--orange);transform:translateY(-4px);box-shadow:0 10px 28px #0008}
+.product-image{height:155px;position:relative;overflow:hidden;background:#211810}
+.product-image img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.product:hover .product-image img{transform:scale(1.07)}
+.product-body{padding:12px 14px 15px;text-align:center;display:flex;flex-direction:column;flex:1}
+.product h3{font-size:18px;font-weight:900;margin-bottom:5px}
+.product p{font-size:12px;color:var(--muted);line-height:1.7;min-height:40px}
+.product-bottom{margin-top:auto;padding-top:10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.price{color:var(--orange);font-size:20px;font-weight:900;white-space:nowrap}
+.add-btn{
+  border:0;border-radius:30px;padding:8px 17px;
+  background:var(--orange);color:white;font-weight:800;
+  transition:.2s;white-space:nowrap;
+}
+.add-btn:hover{background:#ffab31}
+.add-btn i{margin-left:5px}
+.menu-note{text-align:center;color:#a9a099;font-size:12px;margin-top:17px}
+
+/* CART */
+.overlay{
+  position:fixed;inset:0;background:#000a;backdrop-filter:blur(3px);
+  z-index:89;opacity:0;visibility:hidden;transition:.25s;
+}
+.overlay.show{opacity:1;visibility:visible}
+.cart-panel{
+  position:fixed;top:0;right:0;width:min(410px,100%);
+  height:100dvh;background:#151311;z-index:100;
+  border-left:1px solid #68411d;box-shadow:-10px 0 35px #0008;
+  transform:translateX(105%);transition:transform .3s;
+  display:flex;flex-direction:column;
+}
+.cart-panel.open{transform:translateX(0)}
+.cart-head{padding:20px;border-bottom:1px solid #453528;display:flex;align-items:center;justify-content:space-between}
+.cart-head h2{font-size:23px}
+.cart-head h2 i{color:var(--orange);margin-left:8px}
+.icon-btn{background:none;border:0;color:white;font-size:23px;padding:6px}
+.cart-items{flex:1;overflow:auto;padding:15px}
+.empty{text-align:center;color:#aaa;padding:50px 10px;line-height:2}
+.empty i{display:block;font-size:42px;color:var(--orange);margin-bottom:14px}
+.cart-item{
+  display:grid;grid-template-columns:70px 1fr;gap:12px;
+  padding:13px 0;border-bottom:1px solid #41362c;
+}
+.cart-item img{width:70px;height:75px;object-fit:cover;border-radius:9px}
+.cart-item h4{font-size:15px;margin-bottom:4px}
+.cart-item .line-price{color:var(--orange);font-weight:800;font-size:14px}
+.cart-controls{display:flex;align-items:center;gap:9px;margin-top:9px}
+.qty-btn{
+  width:28px;height:28px;border:1px solid #514638;border-radius:50%;
+  color:white;background:#211e1a;
+}
+.qty-btn:hover{border-color:var(--orange);color:var(--orange)}
+.remove-btn{border:0;background:none;color:#ff5b45;margin-right:auto;font-size:15px}
+.cart-foot{padding:18px;border-top:1px solid #453528;background:#0e0c0a}
+.total-line{display:flex;justify-content:space-between;font-size:20px;font-weight:900;margin-bottom:16px}
+.total-line strong{color:var(--orange)}
+.whatsapp-btn{
+  width:100%;border:0;background:var(--green);color:white;
+  padding:14px 10px;border-radius:35px;font-weight:900;font-size:16px;
+}
+.whatsapp-btn:hover{background:#0aa948}
+.clear-btn{
+  width:100%;border:1px solid var(--orange);color:var(--orange);
+  background:transparent;padding:10px;border-radius:30px;
+  margin-top:10px;font-weight:800;
+}
+.clear-btn:hover{background:#ff850015}
+
+/* CHECKOUT */
+.checkout-form{padding:0 17px 15px;overflow-y:auto;max-height:44vh}
+.checkout-form h3{font-size:17px;margin:0 0 12px;color:var(--orange2)}
+.field{margin-bottom:10px}
+.field label{display:block;font-size:13px;color:#ddd;margin-bottom:4px}
+.field input,.field textarea{
+  width:100%;border:1px solid #4a3b2d;border-radius:9px;
+  padding:10px 12px;background:#0e0c0a;color:white;outline:none;
+}
+.field input:focus,.field textarea:focus{border-color:var(--orange)}
+.field textarea{resize:vertical;min-height:65px}
+
+/* FOOTER */
+footer{border-top:2px solid var(--orange);background:#090807;padding:24px 0}
+.footer-grid{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px}
+.footer-info{display:flex;align-items:center;gap:15px;flex-wrap:wrap;font-size:13px;color:#ddd}
+.footer-info i{color:var(--orange);font-size:19px}
+.footer-brand{display:flex;align-items:center;gap:16px}
+.footer-brand .brand-mark{width:65px;height:65px}
+.footer-brand .brand-mark strong{font-size:21px}
+.footer-brand b{font-family:'Lalezar';font-size:27px;color:var(--orange)}
+.footer-social{display:flex;justify-content:flex-end;align-items:center;gap:18px}
+.footer-social a{font-size:20px}
+.footer-social a:hover{color:var(--orange)}
+.copyright{text-align:center;color:#827b74;font-size:11px;margin-top:17px}
+
+/* FEEDBACK */
+.toast{
+  position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);
+  z-index:150;background:#201b15;border:1px solid var(--orange);
+  border-radius:12px;padding:12px 20px;opacity:0;visibility:hidden;
+  transition:.25s;box-shadow:0 8px 25px #0008;width:max-content;max-width:90%;
+  text-align:center;font-size:14px;
+}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+body.cart-open{overflow:hidden}
+
+@media(min-width:1200px){
+ .hero{min-height:390px}
+}
+@media(max-width:900px){
+ .social{display:none}
+ .nav-links{gap:17px}
+ .hero{grid-template-columns:1fr 1fr}
+ .hero-food img{height:285px}
+ .feature-grid{gap:10px}
+ .feature{padding:15px;gap:10px}
+ .feature i{font-size:30px;width:35px}
+ .feature h3{font-size:16px}
+ .feature p{font-size:12px}
+ .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .product-image{height:190px}
+}
+@media(max-width:600px){
+ header{height:72px}
+ .container{width:92%}
+ .brand-mark{width:52px;height:52px}
+ .brand-mark i{font-size:19px}
+ .brand-mark strong{font-size:18px}
+ .nav{gap:9px}
+ .nav-links{
+  display:none;position:absolute;top:71px;right:0;left:0;
+  background:#100e0c;padding:18px 5%;border-bottom:1px solid var(--border);
+  flex-direction:column;align-items:stretch;gap:0;
+ }
+ .nav-links.show{display:flex}
+ .nav-links a{padding:12px 4px;border-bottom:1px solid #28221c}
+ .nav-links a.active{padding:12px 4px;border-bottom:1px solid var(--border)}
+ .mobile-menu{display:block}
+ .order-top{padding:10px 13px;font-size:13px;gap:6px}
+ .hero{display:flex;flex-direction:column-reverse;gap:0;padding:15px 0 5px}
+ .hero-copy{padding:10px 0 0}
+ .hero h1{font-size:43px;margin:5px 0 10px}
+ .hero-kicker{font-size:13px}
+ .hero-copy p{font-size:15px;line-height:1.8}
+ .hero-actions{margin-top:16px;gap:9px}
+ .btn,.btn-outline{padding:11px 17px;font-size:14px}
+ .hero-food{width:100%}
+ .hero-food img{height:230px;object-position:center 55%}
+ .features{padding:12px 0 22px}
+ .feature-grid{grid-template-columns:1fr;gap:10px}
+ .feature{min-height:80px;padding:13px 16px}
+ .feature i{font-size:31px}
+ .feature h3{font-size:17px}
+ .feature p{font-size:12px}
+ .section-title{margin-bottom:17px;font-size:34px}
+ .section-title:before,.section-title:after{width:25px;height:4px}
+ .section-title span{padding:0 7px}
+ .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .product-image{height:130px}
+ .product-body{padding:10px 8px 12px}
+ .product h3{font-size:15px}
+ .product p{font-size:11px;min-height:44px}
+ .product-bottom{flex-direction:column;gap:7px}
+ .price{font-size:18px}
+ .add-btn{width:100%;padding:8px 5px;font-size:13px}
+ .footer-grid{grid-template-columns:1fr;justify-items:center;text-align:center}
+ .footer-info{justify-content:center}
+ .footer-brand{flex-direction:column;gap:5px}
+ .footer-brand b{font-size:24px}
+ .footer-social{justify-content:center}
+ .cart-head h2{font-size:20px}
+ .checkout-form{max-height:38vh}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
 </head>
-<body class="bg-karkiBlack text-white font-cairo overflow-x-hidden">
 
-    <!-- 1. Navbar -->
-    <nav class="fixed w-full top-0 z-50 bg-karkiBlack/90 backdrop-blur-md border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- اللوجو -->
-            <div class="flex items-center gap-3">
-                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 border-2 border-karkiOrange">
-                    <!-- حط لينك صورة اللوجو هنا بدل الـ src -->
-                    <img src="https://via.placeholder.com/100/ffffff/f97316?text=Karki" alt="Karki Logo" class="w-full h-full object-contain rounded-full">
-                </div>
-                <span class="font-lalezar text-3xl text-karkiOrange mt-1">Karki</span>
-            </div>
+<body>
 
-            <!-- لينكات -->
-            <div class="hidden md:flex gap-8 font-semibold text-gray-300">
-                <a href="#hero" class="hover:text-karkiOrange transition">الرئيسية</a>
-                <a href="#menu" class="hover:text-karkiOrange transition">المنيو</a>
-                <a href="#features" class="hover:text-karkiOrange transition">ليه كاركي؟</a>
-            </div>
+<header>
+ <div class="container nav">
+  <div class="social">
+   <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+   <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+   <a href="https://wa.me/201202222669" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
 
-            <!-- زرار السلة -->
-            <button onclick="toggleCart()" class="relative bg-karkiOrange text-white px-5 py-2 rounded-full font-bold hover:bg-orange-600 transition flex items-center gap-2">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>اطلب دلوقتي</span>
-                <span id="cart-count" class="absolute -top-2 -right-2 bg-white text-karkiOrange text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-karkiOrange hidden">0</span>
-            </button>
-        </div>
-    </nav>
+  <a class="brand" href="#home" aria-label="كاركي الرئيسية">
+   <div class="brand-mark">
+    <i class="fa-solid fa-drumstick-bite"></i>
+    <strong>Karki</strong>
+   </div>
+  </a>
 
-    <!-- 2. Hero Section -->
-    <section id="hero" class="hero-bg h-screen flex items-center justify-center relative pt-20">
-        <div class="container mx-auto px-6 text-center z-10">
-            <h1 class="font-lalezar text-6xl md:text-8xl text-karkiOrange mb-4 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">
-                كرمشها.. ومتسيبش ولا نتفة!
-            </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                دجاج طازج، تتبيلة كاركي السرية، وقرمشة مش هتلاقيها غير عندنا. جاهز تجرب أصل المتعة؟
-            </p>
-            <div class="flex justify-center gap-4">
-                <a href="#menu" class="bg-karkiOrange text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-600 transition shadow-[0_0_20px_rgba(249,115,22,0.4)]">
-                    شوف المنيو
-                </a>
-                <button onclick="toggleCart()" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-karkiBlack transition">
-                    اطلب أونلاين
-                </button>
-            </div>
-        </div>
-        <!-- صورة الساندوتش (مستبدلة بصورة مؤقتة) -->
-        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000&auto=format&fit=crop" 
-             alt="Burger" 
-             class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[80%] max-w-3xl opacity-20 pointer-events-none">
-    </section>
+  <nav class="nav-links" id="navLinks">
+   <a class="active" href="#home">الرئيسية</a>
+   <a href="#menu">المنيو</a>
+   <a href="#features">ليه كاركي؟</a>
+   <a href="#footer">معلوماتنا</a>
+  </nav>
 
-    <!-- 3. Features Section -->
-    <section id="features" class="py-20 bg-karkiDark">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-lalezar text-center text-white mb-12">ليه الناس بتختار كاركي؟</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div class="bg-karkiBlack p-8 rounded-2xl border border-gray-800 hover:border-karkiOrange transition">
-                    <i class="fa-solid fa-drumstick-bite text-5xl text-karkiOrange mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">طزاجة كل يوم</h3>
-                    <p class="text-gray-400">دجاج طازج بيتقلي في نفس اللحظة عشان تضمن القرمشة.</p>
-                </div>
-                <div class="bg-karkiBlack p-8 rounded-2xl border border-gray-800 hover:border-karkiOrange transition">
-                    <i class="fa-solid fa-pepper-hot text-5xl text-karkiOrange mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">سر التتبيلة</h3>
-                    <p class="text-gray-400">خلطة كاركي الخاصة اللي بتخلي كل قضمة ليها طعم ميتنسيش.</p>
-                </div>
-                <div class="bg-karkiBlack p-8 rounded-2xl border border-gray-800 hover:border-karkiOrange transition">
-                    <i class="fa-solid fa-box-open text-5xl text-karkiOrange mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">بوكسات الشلة</h3>
-                    <p class="text-gray-400">تغليف برتقالي بيفتح النفس من أول ما تشوفه وبيحافظ على القرمشة.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <button class="order-top" onclick="toggleCart(true)">
+   <i class="fa-solid fa-cart-shopping"></i>
+   اطلب دلوقتي
+   <span class="cart-count" id="topCount">0</span>
+  </button>
+  <button class="mobile-menu" onclick="toggleNav()" aria-label="فتح القائمة">
+   <i class="fa-solid fa-bars"></i>
+  </button>
+ </div>
+</header>
 
-    <!-- 4. Menu Section -->
-    <section id="menu" class="py-20 bg-karkiBlack">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-lalezar text-center text-karkiOrange mb-12">منيو كاركي</h2>
-            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- الكروت هتتولد هنا بالـ JavaScript -->
-            </div>
-        </div>
-    </section>
+<main>
+<section class="container hero" id="home">
+ <div class="hero-food">
+  <img
+   src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=1100&q=85"
+   alt="ساندوتش دجاج مقرمش"
+   fetchpriority="high"
+   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=1000&q=80'">
+ </div>
+ <div class="hero-copy">
+  <div class="hero-kicker">القرمشة اللي هتخليك ترجع تاني!</div>
+  <h1><span>كرمشها..</span> ومتسيبش ولا نتفة!</h1>
+  <p>دجاج طازج، تتبيلة كاركي السرية،<br>وقرمشة مش هتلاقيها غير عندنا.</p>
+  <div class="hero-actions">
+   <a href="#menu" class="btn"><i class="fa-solid fa-bell-concierge"></i> شوف المنيو</a>
+   <button class="btn-outline" onclick="toggleCart(true)">
+    <i class="fa-brands fa-whatsapp"></i> اطلب أونلاين
+   </button>
+  </div>
+ </div>
+</section>
 
-    <!-- 5. Cart Sidebar -->
-    <div id="cart-sidebar" class="fixed top-0 left-0 w-full md:w-[400px] h-full bg-karkiDark z-[100] transform -translate-x-full transition-transform duration-300 shadow-2xl border-r border-gray-800 flex flex-col">
-        <div class="p-6 flex justify-between items-center border-b border-gray-800">
-            <h2 class="text-2xl font-bold text-white">سلة الطلبات <i class="fa-solid fa-cart-shopping text-karkiOrange ml-2"></i></h2>
-            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-        
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-            <!-- الأصناف هتظهر هنا -->
-            <p class="text-center text-gray-500 mt-10">السلة فاضية.. كرمشها واطلب!</p>
-        </div>
+<section class="container features" id="features">
+ <div class="feature-grid">
+  <article class="feature">
+   <i class="fa-solid fa-drumstick-bite"></i>
+   <div>
+    <h3>طزاجة كل يوم</h3>
+    <p>دجاج طازج بيتقلي في نفس اللحظة عشان تضمن القرمشة.</p>
+   </div>
+  </article>
+  <article class="feature">
+   <i class="fa-solid fa-pepper-hot"></i>
+   <div>
+    <h3>سر التتبيلة</h3>
+    <p>خلطة كاركي الخاصة اللي بتخلي كل قضمة متتنسيش.</p>
+   </div>
+  </article>
+  <article class="feature">
+   <i class="fa-solid fa-box-open"></i>
+   <div>
+    <h3>بوكسات الشلة</h3>
+    <p>تغليف يفتح النفس من أول ما تشوفه.</p>
+   </div>
+  </article>
+ </div>
+</section>
 
-        <div class="p-6 border-t border-gray-800 bg-karkiBlack">
-            <div class="flex justify-between items-center mb-4 text-xl font-bold">
-                <span>الإجمالي:</span>
-                <span id="cart-total" class="text-karkiOrange">0 ج.م</span>
-            </div>
-            <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#1ebd5a] transition flex justify-center items-center gap-2">
-                <i class="fa-brands fa-whatsapp text-2xl"></i> إتمام الطلب عبر واتساب
-            </button>
-        </div>
-    </div>
+<section class="container menu-section" id="menu">
+ <h2 class="section-title"><span>منيو كاركي</span></h2>
+ <div class="menu-grid" id="menuGrid"></div>
+ <p class="menu-note">الأسعار والصور المعروضة تجريبية وتحتاج تأكيد المطعم قبل النشر.</p>
+</section>
+</main>
 
-    <!-- Overlay for Cart -->
-    <div id="cart-overlay" class="fixed inset-0 bg-black/60 z-[90] hidden backdrop-blur-sm" onclick="toggleCart()"></div>
+<footer id="footer">
+ <div class="container footer-grid">
+  <div class="footer-info">
+   <span><i class="fa-solid fa-location-dot"></i> العنوان: يضاف عنوان المطعم</span>
+   <span><i class="fa-solid fa-phone"></i> يضاف رقم المطعم</span>
+  </div>
 
-    <!-- 6. Footer -->
-    <footer class="bg-karkiBlack border-t border-gray-800 py-10 text-center">
-        <div class="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center p-1 mb-4">
-             <img src="https://via.placeholder.com/100/ffffff/f97316?text=Karki" alt="Logo" class="w-full h-full object-contain rounded-full">
-        </div>
-        <p class="text-karkiOrange font-lalezar text-2xl mb-4">كرمشها مع كاركي</p>
-        <div class="flex justify-center gap-6 mb-6 text-2xl">
-            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://wa.me/201202222669" target="_blank" class="text-gray-400 hover:text-[#25D366] transition"><i class="fa-brands fa-whatsapp"></i></a>
-        </div>
-        <p class="text-gray-600 text-sm">حقوق النشر محفوظة لمطعم كاركي &copy; 2024</p>
-    </footer>
+  <div class="footer-brand">
+   <div class="brand-mark">
+    <i class="fa-solid fa-drumstick-bite"></i>
+    <strong>Karki</strong>
+   </div>
+   <b>كرمشها مع كاركي</b>
+  </div>
 
-    <!-- JavaScript -->
-    <script>
-        // 1. بيانات المنيو
-        const menuData = [
-            { id: 1, name: "دبل سترايك", desc: "قطعتين دجاج مقرمش، جبنة سايحة، هالبينو، وصوص كاركي السري.", price: 85, img: "https://images.unsplash.com/photo-1615297928064-24977384d0da?q=80&w=600&auto=format&fit=crop" },
-            { id: 2, name: "كاركي دينر", desc: "قطع دجاج مقرمش، بطاطس، كول سلو، وخبز.", price: 150, img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=600&auto=format&fit=crop" },
-            { id: 3, name: "رويال تشيكن", desc: "ساندوتش دجاج مقرمش مع صوص الثومية والجبنة الشيدر.", price: 95, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=600&auto=format&fit=crop" },
-            { id: 4, name: "بطاطس بالجبنة", desc: "بطاطس مقرمشة مغطاة بصوص الجبنة السايحة.", price: 35, img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600&auto=format&fit=crop" }
-        ];
+  <div class="footer-social">
+   <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+   <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+   <a href="https://wa.me/201202222669" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+  </div>
+ </div>
+ <p class="copyright">حقوق النشر محفوظة لكاركي © <span id="year"></span></p>
+</footer>
 
-        let cart = [];
+<div class="overlay" id="overlay" onclick="toggleCart(false)"></div>
 
-        // 2. عرض المنيو
-        const menuGrid = document.getElementById('menu-grid');
-        menuData.forEach(item => {
-            menuGrid.innerHTML += `
-                <div class="bg-karkiDark rounded-2xl overflow-hidden border border-gray-800 hover:border-karkiOrange transition group">
-                    <div class="h-48 overflow-hidden">
-                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2">${item.name}</h3>
-                        <p class="text-gray-400 text-sm mb-4 h-10">${item.desc}</p>
-                        <div class="flex justify-between items-center">
-                            <span class="text-karkiOrange font-bold text-xl">${item.price} ج.م</span>
-                            <button onclick="addToCart(${item.id})" class="bg-karkiBlack border border-gray-700 hover:border-karkiOrange hover:bg-karkiOrange hover:text-white px-4 py-2 rounded-lg transition">
-                                <i class="fa-solid fa-plus"></i> أضف
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-        });
+<aside class="cart-panel" id="cartPanel" aria-label="سلة الطلبات" aria-hidden="true">
+ <div class="cart-head">
+  <h2><i class="fa-solid fa-cart-shopping"></i> سلة الطلبات</h2>
+  <button class="icon-btn" onclick="toggleCart(false)" aria-label="إغلاق السلة">
+   <i class="fa-solid fa-xmark"></i>
+  </button>
+ </div>
 
-        // 3. وظائف السلة
-        function toggleCart() {
-            const sidebar = document.getElementById('cart-sidebar');
-            const overlay = document.getElementById('cart-overlay');
-            
-            if (sidebar.classList.contains('-translate-x-full')) {
-                sidebar.classList.remove('-translate-x-full');
-                sidebar.classList.add('translate-x-0');
-                overlay.classList.remove('hidden');
-            } else {
-                sidebar.classList.add('-translate-x-full');
-                sidebar.classList.remove('translate-x-0');
-                overlay.classList.add('hidden');
-            }
-        }
+ <div class="cart-items" id="cartItems">
+  <div class="empty">
+   <i class="fa-solid fa-basket-shopping"></i>
+   السلة فاضية.. كرمشها واطلب!
+  </div>
+ </div>
 
-        function addToCart(id) {
-            const item = menuData.find(i => i.id === id);
-            const existingItem = cart.find(i => i.id === id);
+ <form class="checkout-form" id="checkoutForm">
+  <h3><i class="fa-regular fa-address-card"></i> بيانات التوصيل</h3>
+  <div class="field">
+   <label for="customerName">الاسم *</label>
+   <input id="customerName" name="customerName" required maxlength="80" autocomplete="name" placeholder="اسمك بالكامل">
+  </div>
+  <div class="field">
+   <label for="customerPhone">رقم الموبايل *</label>
+   <input id="customerPhone" name="customerPhone" required type="tel" maxlength="20" autocomplete="tel" placeholder="رقم للتواصل">
+  </div>
+  <div class="field">
+   <label for="customerAddress">العنوان بالتفصيل *</label>
+   <textarea id="customerAddress" name="customerAddress" required maxlength="300" autocomplete="street-address" placeholder="المنطقة والشارع ورقم العقار"></textarea>
+  </div>
+  <div class="field">
+   <label for="customerNotes">ملاحظات (اختياري)</label>
+   <textarea id="customerNotes" name="customerNotes" maxlength="300" placeholder="أي تفاصيل إضافية للطلب"></textarea>
+  </div>
+ </form>
 
-            if (existingItem) {
-                existingItem.qty += 1;
-            } else {
-                cart.push({ ...item, qty: 1 });
-            }
-            
-            updateCartUI();
-            
-            // أنيميشن بسيط للزرار
-            const count = document.getElementById('cart-count');
-            count.classList.add('animate-bounce');
-            setTimeout(() => count.classList.remove('animate-bounce'), 500);
-        }
+ <div class="cart-foot">
+  <div class="total-line">
+   <span>الإجمالي:</span>
+   <strong id="cartTotal">0 ج.م</strong>
+  </div>
+  <button class="whatsapp-btn" onclick="checkoutWhatsApp()">
+   <i class="fa-brands fa-whatsapp"></i> إتمام الطلب عبر واتساب
+  </button>
+  <button class="clear-btn" onclick="clearCart()">
+   <i class="fa-solid fa-trash-can"></i> إفراغ السلة
+  </button>
+ </div>
+</aside>
 
-        function removeFromCart(id) {
-            cart = cart.filter(i => i.id !== id);
-            updateCartUI();
-        }
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-        function updateCartUI() {
-            const cartItemsDiv = document.getElementById('cart-items');
-            const cartCount = document.getElementById('cart-count');
-            const cartTotal = document.getElementById('cart-total');
+<script>
+"use strict";
 
-            // تحديث العداد
-            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            if (totalItems > 0) {
-                cartCount.innerText = totalItems;
-                cartCount.classList.remove('hidden');
-            } else {
-                cartCount.classList.add('hidden');
-            }
+/*
+ * قبل نشر الموقع:
+ * 1) راجع الأسعار والأصناف مع المطعم.
+ * 2) استبدل رقم واتساب التجريبي برقم الطلبات الصحيح بصيغة دولية.
+ * 3) استبدل روابط التواصل والعنوان ببيانات المطعم الحقيقية.
+ */
 
-            // تحديث العناصر
-            if (cart.length === 0) {
-                cartItemsDiv.innerHTML = `<p class="text-center text-gray-500 mt-10">السلة فاضية.. كرمشها واطلب!</p>`;
-                cartTotal.innerText = `0 ج.م`;
-                return;
-            }
+const WHATSAPP_NUMBER = "201202222669";
 
-            cartItemsDiv.innerHTML = '';
-            let totalPrice = 0;
+const menuData = [
+ {
+  id:1,
+  name:"دبل سترايك",
+  desc:"دجاج مقرمش، جبنة سايحة وصوص كاركي.",
+  price:85,
+  img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086?auto=format&fit=crop&w=650&q=80"
+ },
+ {
+  id:2,
+  name:"كاركي دينر",
+  desc:"قطع دجاج مقرمشة مع البطاطس والإضافات.",
+  price:150,
+  img:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=650&q=80"
+ },
+ {
+  id:3,
+  name:"رويال تشيكن",
+  desc:"ساندوتش دجاج مقرمش مع الجبنة والصوص.",
+  price:95,
+  img:"https://images.unsplash.com/photo-1615297928064-24977384d0da?auto=format&fit=crop&w=650&q=80"
+ },
+ {
+  id:4,
+  name:"بطاطس بالجبنة",
+  desc:"بطاطس ذهبية مع صوص الجبنة.",
+  price:35,
+  img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=650&q=80"
+ }
+];
 
-            cart.forEach(item => {
-                totalPrice += item.price * item.qty;
-                cartItemsDiv.innerHTML += `
-                    <div class="flex justify-between items-center bg-karkiBlack p-4 rounded-xl border border-gray-800">
-                        <div class="flex items-center gap-3">
-                            <img src="${item.img}" class="w-12 h-12 rounded-lg object-cover">
-                            <div>
-                                <h4 class="font-bold text-sm">${item.name}</h4>
-                                <p class="text-karkiOrange text-sm">${item.price} ج.م</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <span class="font-bold">x${item.qty}</span>
-                            <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-400">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
+let cart = [];
+const $ = id => document.getElementById(id);
+const money = n => `${n.toLocaleString("en-US")} ج.م`;
 
-            cartTotal.innerText = `${totalPrice} ج.م`;
-        }
+function renderMenu(){
+ const grid = $("menuGrid");
+ grid.innerHTML = "";
 
-        // 4. الطلب عبر واتساب
-        function checkoutWhatsApp() {
-            if (cart.length === 0) {
-                alert("السلة فاضية يا صاحبي! اختار حاجة الأول.");
-                return;
-            }
+ menuData.forEach(item => {
+  const card = document.createElement("article");
+  card.className = "product";
 
-            const phoneNumber = "201202222669"; // رقم الواتساب بتاعهم
-            let message = "مرحباً كاركي، أريد تأكيد الطلب التالي:\n\n";
-            let total = 0;
+  const imageWrap = document.createElement("div");
+  imageWrap.className = "product-image";
 
-            cart.forEach(item => {
-                message += `- ${item.qty}x ${item.name} (${item.price * item.qty} ج.م)\n`;
-                total += item.price * item.qty;
-            });
+  const img = document.createElement("img");
+  img.src = item.img;
+  img.alt = item.name;
+  img.loading = "lazy";
+  img.onerror = function(){
+   this.onerror = null;
+   this.src = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=650&q=80";
+  };
+  imageWrap.appendChild(img);
 
-            message += `\nالإجمالي: ${total} ج.م\n\nجاهز للدفع والاستلام!`;
+  const body = document.createElement("div");
+  body.className = "product-body";
 
-            const encodedMessage = encodeURIComponent(message);
-            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
-        }
-    </script>
+  const name = document.createElement("h3");
+  name.textContent = item.name;
+
+  const desc = document.createElement("p");
+  desc.textContent = item.desc;
+
+  const bottom = document.createElement("div");
+  bottom.className = "product-bottom";
+
+  const price = document.createElement("span");
+  price.className = "price";
+  price.textContent = money(item.price);
+
+  const add = document.createElement("button");
+  add.className = "add-btn";
+  add.type = "button";
+  add.innerHTML = '<i class="fa-solid fa-plus"></i> أضف';
+  add.setAttribute("aria-label", `أضف ${item.name} للسلة`);
+  add.addEventListener("click", () => addToCart(item.id));
+
+  bottom.append(price, add);
+  body.append(name, desc, bottom);
+  card.append(imageWrap, body);
+  grid.appendChild(card);
+ });
+}
+
+function showToast(message){
+ const toast = $("toast");
+ toast.textContent = message;
+ toast.classList.add("show");
+ clearTimeout(showToast.timer);
+ showToast.timer = setTimeout(() => toast.classList.remove("show"), 2500);
+}
+
+function toggleNav(){
+ $("navLinks").classList.toggle("show");
+}
+
+function toggleCart(open){
+ const panel = $("cartPanel");
+ const overlay = $("overlay");
+ panel.classList.toggle("open", open);
+ overlay.classList.toggle("show", open);
+ panel.setAttribute("aria-hidden", String(!open));
+ document.body.classList.toggle("cart-open", open);
+}
+
+function addToCart(id){
+ const product = menuData.find(item => item.id === id);
+ if(!product) return;
+
+ const existing = cart.find(item => item.id === id);
+ if(existing) existing.qty++;
+ else cart.push({...product, qty:1});
+
+ updateCartUI();
+ showToast(`اتضاف ${product.name} للسلة`);
+}
+
+function changeQty(id, amount){
+ const item = cart.find(product => product.id === id);
+ if(!item) return;
+
+ item.qty += amount;
+ if(item.qty <= 0) cart = cart.filter(product => product.id !== id);
+ updateCartUI();
+}
+
+function removeFromCart(id){
+ cart = cart.filter(item => item.id !== id);
+ updateCartUI();
+}
+
+function clearCart(){
+ if(cart.length === 0){
+  showToast("السلة فاضية بالفعل");
+  return;
+ }
+ if(!confirm("متأكد إنك عايز تفضي السلة؟")) return;
+ cart = [];
+ updateCartUI();
+ showToast("تم إفراغ السلة");
+}
+
+function updateCartUI(){
+ const container = $("cartItems");
+ const count = cart.reduce((sum,item) => sum + item.qty, 0);
+ const total = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+
+ $("topCount").textContent = count;
+ $("cartTotal").textContent = money(total);
+ container.innerHTML = "";
+
+ if(cart.length === 0){
+  const empty = document.createElement("div");
+  empty.className = "empty";
+  empty.innerHTML = '<i class="fa-solid fa-basket-shopping"></i>السلة فاضية.. كرمشها واطلب!';
+  container.appendChild(empty);
+  return;
+ }
+
+ cart.forEach(item => {
+  const row = document.createElement("div");
+  row.className = "cart-item";
+
+  const img = document.createElement("img");
+  img.src = item.img;
+  img.alt = item.name;
+  img.onerror = function(){
+   this.onerror = null;
+   this.src = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=200&q=70";
+  };
+
+  const details = document.createElement("div");
+  const title = document.createElement("h4");
+  title.textContent = item.name;
+
+  const price = document.createElement("div");
+  price.className = "line-price";
+  price.textContent = money(item.price * item.qty);
+
+  const controls = document.createElement("div");
+  controls.className = "cart-controls";
+
+  const minus = document.createElement("button");
+  minus.type = "button";
+  minus.className = "qty-btn";
+  minus.textContent = "−";
+  minus.setAttribute("aria-label", "تقليل الكمية");
+  minus.addEventListener("click", () => changeQty(item.id, -1));
+
+  const qty = document.createElement("span");
+  qty.textContent = item.qty;
+  qty.setAttribute("aria-label", "الكمية");
+
+  const plus = document.createElement("button");
+  plus.type = "button";
+  plus.className = "qty-btn";
+  plus.textContent = "+";
+  plus.setAttribute("aria-label", "زيادة الكمية");
+  plus.addEventListener("click", () => changeQty(item.id, 1));
+
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.className = "remove-btn";
+  remove.innerHTML = '<i class="fa-solid fa-trash"></i>';
+  remove.setAttribute("aria-label", `حذف ${item.name}`);
+  remove.addEventListener("click", () => removeFromCart(item.id));
+
+  controls.append(minus, qty, plus, remove);
+  details.append(title, price, controls);
+  row.append(img, details);
+  container.appendChild(row);
+ });
+}
+
+function checkoutWhatsApp(){
+ if(cart.length === 0){
+  showToast("السلة فاضية! اختار منتجات الأول.");
+  return;
+ }
+
+ if(!/^\d{10,15}$/.test(WHATSAPP_NUMBER)){
+  showToast("رقم واتساب المطعم محتاج مراجعة.");
+  return;
+ }
+
+ const form = $("checkoutForm");
+ if(!form.reportValidity()) return;
+
+ const name = $("customerName").value.trim();
+ const phone = $("customerPhone").value.trim();
+ const address = $("customerAddress").value.trim();
+ const notes = $("customerNotes").value.trim();
+
+ if(!name || !phone || !address){
+  showToast("من فضلك أكمل بيانات التوصيل.");
+  return;
+ }
+
+ const total = cart.reduce((sum,item) => sum + item.price * item.qty, 0);
+ let message = "🍗 طلب جديد من موقع كاركي\n\n";
+ message += `👤 الاسم: ${name}\n`;
+ message += `📱 رقم العميل: ${phone}\n`;
+ message += `📍 العنوان: ${address}\n\n`;
+ message += "🛒 تفاصيل الطلب:\n";
+
+ cart.forEach(item => {
+  message += `• ${item.name} × ${item.qty} = ${money(item.price * item.qty)}\n`;
+ });
+
+ message += `\n💰 إجمالي المنتجات: ${money(total)}\n`;
+ message += "🚚 مصاريف التوصيل: يتم تأكيدها مع المطعم\n";
+
+ if(notes) message += `📝 ملاحظات: ${notes}\n`;
+
+ message += "\nيرجى تأكيد توافر الأصناف والطلب قبل التجهيز.";
+
+ const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+ const opened = window.open(url, "_blank", "noopener,noreferrer");
+
+ if(!opened){
+  window.location.href = url;
+ }
+}
+
+document.addEventListener("keydown", event => {
+ if(event.key === "Escape"){
+  toggleCart(false);
+  $("navLinks").classList.remove("show");
+ }
+});
+
+$("navLinks").querySelectorAll("a").forEach(link => {
+ link.addEventListener("click", () => $("navLinks").classList.remove("show"));
+});
+
+$("year").textContent = new Date().getFullYear();
+
+renderMenu();
+updateCartUI();
+</script>
+
 </body>
 </html>
