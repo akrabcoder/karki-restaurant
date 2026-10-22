@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karki | كرمشها</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Lalezar&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        karkiOrange: '#f97316', // برتقالي كاركي
+                        karkiBlack: '#0f0f0f',  // أسود فاحم
+                        karkiDark: '#1a1a1a',   // رمادي غامق للكروت
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        lalezar: ['Lalezar', 'cursive'], // خط شبيه باليدوي
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* إخفاء شريط التمرير */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0f0f0f; }
+        ::-webkit-scrollbar-thumb { background: #f97316; border-radius: 4px; }
+        
+        /* تأثير الخلفية */
+        .hero-bg {
+            background-image: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 100%);
+        }
+    </style>
+</head>
+<body class="bg-karkiBlack text-white font-cairo overflow-x-hidden">
+
+    <!-- 1. Navbar -->
+    <nav class="fixed w-full top-0 z-50 bg-karkiBlack/90 backdrop-blur-md border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <!-- اللوجو -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center p-1 border-2 border-karkiOrange">
+                    <!-- حط لينك صورة اللوجو هنا بدل الـ src -->
+                    <img src="https://via.placeholder.com/100/ffffff/f97316?text=Karki" alt="Karki Logo" class="w-full h-full object-contain rounded-full">
+                </div>
+                <span class="font-lalezar text-3xl text-karkiOrange mt-1">Karki</span>
+            </div>
+
+            <!-- لينكات -->
+            <div class="hidden md:flex gap-8 font-semibold text-gray-300">
+                <a href="#hero" class="hover:text-karkiOrange transition">الرئيسية</a>
+                <a href="#menu" class="hover:text-karkiOrange transition">المنيو</a>
+                <a href="#features" class="hover:text-karkiOrange transition">ليه كاركي؟</a>
+            </div>
+
+            <!-- زرار السلة -->
+            <button onclick="toggleCart()" class="relative bg-karkiOrange text-white px-5 py-2 rounded-full font-bold hover:bg-orange-600 transition flex items-center gap-2">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>اطلب دلوقتي</span>
+                <span id="cart-count" class="absolute -top-2 -right-2 bg-white text-karkiOrange text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center border-2 border-karkiOrange hidden">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <section id="hero" class="hero-bg h-screen flex items-center justify-center relative pt-20">
+        <div class="container mx-auto px-6 text-center z-10">
+            <h1 class="font-lalezar text-6xl md:text-8xl text-karkiOrange mb-4 drop-shadow-[0_0_15px_rgba(249,115,22,0.5)]">
+                كرمشها.. ومتسيبش ولا نتفة!
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
+                دجاج طازج، تتبيلة كاركي السرية، وقرمشة مش هتلاقيها غير عندنا. جاهز تجرب أصل المتعة؟
+            </p>
+            <div class="flex justify-center gap-4">
+                <a href="#menu" class="bg-karkiOrange text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-orange-600 transition shadow-[0_0_20px_rgba(249,115,22,0.4)]">
+                    شوف المنيو
+                </a>
+                <button onclick="toggleCart()" class="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-karkiBlack transition">
+                    اطلب أونلاين
+                </button>
+            </div>
+        </div>
+        <!-- صورة الساندوتش (مستبدلة بصورة مؤقتة) -->
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=1000&auto=format&fit=crop" 
+             alt="Burger" 
+             class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-[80%] max-w-3xl opacity-20 pointer-events-none">
+    </section>
+
+    <!-- 3. Features Section -->
+    <section id="features" class="py-20 bg-karkiDark">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-lalezar text-center text-white mb-12">ليه الناس بتختار كاركي؟</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="bg-karkiBlack p-8 rounded-2xl border border-gray-800 hover:border-karkiOrange transition">
+                    <i class="fa-solid fa-drumstick-bite text-5xl text-karkiOrange mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">طزاجة كل يوم</h3>
+                    <p class="text-gray-400">دجاج طازج بيتقلي في نفس اللحظة عشان تضمن القرمشة.</p>
+                </div>
+                <div class="bg-karkiBlack p-8 rounded-2xl border border-gray-800 hover:border-karkiOrange transition">
+                    <i class="fa-solid fa-pepper-hot text-5xl text-karkiOrange mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">سر التتبيلة</h3>
+                    <p class="text-gray-400">خلطة كاركي الخاصة اللي بتخلي كل قضمة ليها طعم ميتنسيش.</p>
+                </div>
+                <div class="bg-karkiBlack p-8 rounded-2xl border border-gray-800 hover:border-karkiOrange transition">
+                    <i class="fa-solid fa-box-open text-5xl text-karkiOrange mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">بوكسات الشلة</h3>
+                    <p class="text-gray-400">تغليف برتقالي بيفتح النفس من أول ما تشوفه وبيحافظ على القرمشة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Menu Section -->
+    <section id="menu" class="py-20 bg-karkiBlack">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-lalezar text-center text-karkiOrange mb-12">منيو كاركي</h2>
+            <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- الكروت هتتولد هنا بالـ JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Cart Sidebar -->
+    <div id="cart-sidebar" class="fixed top-0 left-0 w-full md:w-[400px] h-full bg-karkiDark z-[100] transform -translate-x-full transition-transform duration-300 shadow-2xl border-r border-gray-800 flex flex-col">
+        <div class="p-6 flex justify-between items-center border-b border-gray-800">
+            <h2 class="text-2xl font-bold text-white">سلة الطلبات <i class="fa-solid fa-cart-shopping text-karkiOrange ml-2"></i></h2>
+            <button onclick="toggleCart()" class="text-gray-400 hover:text-white text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- الأصناف هتظهر هنا -->
+            <p class="text-center text-gray-500 mt-10">السلة فاضية.. كرمشها واطلب!</p>
+        </div>
+
+        <div class="p-6 border-t border-gray-800 bg-karkiBlack">
+            <div class="flex justify-between items-center mb-4 text-xl font-bold">
+                <span>الإجمالي:</span>
+                <span id="cart-total" class="text-karkiOrange">0 ج.م</span>
+            </div>
+            <button onclick="checkoutWhatsApp()" class="w-full bg-[#25D366] text-white py-4 rounded-xl font-bold text-lg hover:bg-[#1ebd5a] transition flex justify-center items-center gap-2">
+                <i class="fa-brands fa-whatsapp text-2xl"></i> إتمام الطلب عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay for Cart -->
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 z-[90] hidden backdrop-blur-sm" onclick="toggleCart()"></div>
+
+    <!-- 6. Footer -->
+    <footer class="bg-karkiBlack border-t border-gray-800 py-10 text-center">
+        <div class="w-16 h-16 bg-white rounded-full mx-auto flex items-center justify-center p-1 mb-4">
+             <img src="https://via.placeholder.com/100/ffffff/f97316?text=Karki" alt="Logo" class="w-full h-full object-contain rounded-full">
+        </div>
+        <p class="text-karkiOrange font-lalezar text-2xl mb-4">كرمشها مع كاركي</p>
+        <div class="flex justify-center gap-6 mb-6 text-2xl">
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white transition"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/201202222669" target="_blank" class="text-gray-400 hover:text-[#25D366] transition"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <p class="text-gray-600 text-sm">حقوق النشر محفوظة لمطعم كاركي &copy; 2024</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 1. بيانات المنيو
+        const menuData = [
+            { id: 1, name: "دبل سترايك", desc: "قطعتين دجاج مقرمش، جبنة سايحة، هالبينو، وصوص كاركي السري.", price: 85, img: "https://images.unsplash.com/photo-1615297928064-24977384d0da?q=80&w=600&auto=format&fit=crop" },
+            { id: 2, name: "كاركي دينر", desc: "قطع دجاج مقرمش، بطاطس، كول سلو، وخبز.", price: 150, img: "https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?q=80&w=600&auto=format&fit=crop" },
+            { id: 3, name: "رويال تشيكن", desc: "ساندوتش دجاج مقرمش مع صوص الثومية والجبنة الشيدر.", price: 95, img: "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=600&auto=format&fit=crop" },
+            { id: 4, name: "بطاطس بالجبنة", desc: "بطاطس مقرمشة مغطاة بصوص الجبنة السايحة.", price: 35, img: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600&auto=format&fit=crop" }
+        ];
+
+        let cart = [];
+
+        // 2. عرض المنيو
+        const menuGrid = document.getElementById('menu-grid');
+        menuData.forEach(item => {
+            menuGrid.innerHTML += `
+                <div class="bg-karkiDark rounded-2xl overflow-hidden border border-gray-800 hover:border-karkiOrange transition group">
+                    <div class="h-48 overflow-hidden">
+                        <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">${item.name}</h3>
+                        <p class="text-gray-400 text-sm mb-4 h-10">${item.desc}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-karkiOrange font-bold text-xl">${item.price} ج.م</span>
+                            <button onclick="addToCart(${item.id})" class="bg-karkiBlack border border-gray-700 hover:border-karkiOrange hover:bg-karkiOrange hover:text-white px-4 py-2 rounded-lg transition">
+                                <i class="fa-solid fa-plus"></i> أضف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // 3. وظائف السلة
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const overlay = document.getElementById('cart-overlay');
+            
+            if (sidebar.classList.contains('-translate-x-full')) {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        function addToCart(id) {
+            const item = menuData.find(i => i.id === id);
+            const existingItem = cart.find(i => i.id === id);
+
+            if (existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...item, qty: 1 });
+            }
+            
+            updateCartUI();
+            
+            // أنيميشن بسيط للزرار
+            const count = document.getElementById('cart-count');
+            count.classList.add('animate-bounce');
+            setTimeout(() => count.classList.remove('animate-bounce'), 500);
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(i => i.id !== id);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+
+            // تحديث العداد
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            if (totalItems > 0) {
+                cartCount.innerText = totalItems;
+                cartCount.classList.remove('hidden');
+            } else {
+                cartCount.classList.add('hidden');
+            }
+
+            // تحديث العناصر
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = `<p class="text-center text-gray-500 mt-10">السلة فاضية.. كرمشها واطلب!</p>`;
+                cartTotal.innerText = `0 ج.م`;
+                return;
+            }
+
+            cartItemsDiv.innerHTML = '';
+            let totalPrice = 0;
+
+            cart.forEach(item => {
+                totalPrice += item.price * item.qty;
+                cartItemsDiv.innerHTML += `
+                    <div class="flex justify-between items-center bg-karkiBlack p-4 rounded-xl border border-gray-800">
+                        <div class="flex items-center gap-3">
+                            <img src="${item.img}" class="w-12 h-12 rounded-lg object-cover">
+                            <div>
+                                <h4 class="font-bold text-sm">${item.name}</h4>
+                                <p class="text-karkiOrange text-sm">${item.price} ج.م</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="font-bold">x${item.qty}</span>
+                            <button onclick="removeFromCart(${item.id})" class="text-red-500 hover:text-red-400">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartTotal.innerText = `${totalPrice} ج.م`;
+        }
+
+        // 4. الطلب عبر واتساب
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert("السلة فاضية يا صاحبي! اختار حاجة الأول.");
+                return;
+            }
+
+            const phoneNumber = "201202222669"; // رقم الواتساب بتاعهم
+            let message = "مرحباً كاركي، أريد تأكيد الطلب التالي:\n\n";
+            let total = 0;
+
+            cart.forEach(item => {
+                message += `- ${item.qty}x ${item.name} (${item.price * item.qty} ج.م)\n`;
+                total += item.price * item.qty;
+            });
+
+            message += `\nالإجمالي: ${total} ج.م\n\nجاهز للدفع والاستلام!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+        }
+    </script>
+</body>
+</html>
